@@ -43,9 +43,9 @@ Route::prefix('master')->group(function () {
     Route::view('/supplier/edit', $prefix . 'supplier.edit');
     Route::view('/supplier/branch', $prefix . 'supplier.branch.index');
     Route::view('/supplier/branch/create', $prefix . 'supplier.branch.create');
-    Route::view('/customer', $prefix . 'customer.index');
-    Route::view('/customer/create', $prefix . 'customer.create');
-    Route::view('/customer/edit', $prefix . 'customer.edit');
+
+    Route::resource('customer', 'CustomerController');
+
     Route::view('/customer/branch', $prefix . 'customer.branch.index');
     Route::view('/customer/branch/create', $prefix . 'customer.branch.create');
 
