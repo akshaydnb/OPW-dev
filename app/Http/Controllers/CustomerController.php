@@ -20,65 +20,39 @@ class CustomerController extends Controller
 
     public function create()
     {
-        return view($this->viewPrefix . 'create', compact('products'));
+        return view($this->viewPrefix . 'create');
     }
 
-    public function store(BarcodeRequest $request)
+    public function store(CustomerRequest $request)
     {
-        $parameterDetail = '';
+        
+        $customer = Customer::create([
+            'name' => $request->name
+        ]);
 
-        if($request->inputNames != ''){
-
-            $parameterDetailArray = array();
-            $inputs = explode('#', $request->inputNames);
-
-            for($i = 1; $i < count($inputs); $i++){
-
-                if($request->input($inputs[$i]) != null){
-
-                    $id = app(ParameterValueController::class)->
-                            checkAndStore($inputs[$i], $request->input($inputs[$i]));
-
-                    $parameterDetailArray[$inputs[$i]]['value'] = $request->input($inputs[$i]);
-                    $parameterDetailArray[$inputs[$i]]['id'] = $id;
-
-                }
-
-            }
-
-            $parameterDetail = json_encode($parameterDetailArray);
-        }
-
-        if($request->gst_id > 0){
-            $gst_id = $request->gst_id;
-        }else{
-            $gst = Gst::create([
-                'hsn_code' => $request->hsn_code,
-                'gst_percentage' => $request->gst_percentage,
-            ]);
-            $gst_id = $gst->id;
-        }
-
-        Barcode::create([
-            'barcode' => $request->barcode,
-            'gst_id' => $gst_id,
-            'product_id' => $request->product_id,
-            'normal_sales_price' => $request->normal_sales_price,
-            'discount_sales_price' => $request->discount_sales_price,
-            'parameterDetail' => $parameterDetail,
+        $branch = Branch::create([
+            'owners_id' => $customer->id,
+            'owners_type' => 'Customer',
+            'shop_name' => $request->shop_name,
+            'branch_name' => $request->branch_name,
+            'landline_number' => $request->landline_number,
+            'address' => $request->address,
+            'city' => $request->city,
+            'state' => $request->state,
+            'gst_number' => $request->gst_number,
+            'gst_type' => $request->gst_type,
         ]);
 
         return redirect()->route($this->routePrefix . 'index')
-                ->with('success', 'HSN Code added successfully');
+                ->with('success', 'Customer added successfully');
     }
 
-    public function edit(barcode $barcode)
+    public function edit(customer $customer)
     {
-        $barcode->hsn_code = $barcode->gst->hsn_code;
-        return view($this->viewPrefix . 'edit', compact('barcode'));
+        return view($this->viewPrefix . 'edit', compact('customer'));
     }
 
-    public function update(BarcodeRequest $request, barcode $barcode)
+    public function update(CustomerRequest $request, customer $customer)
     {
         $parameterDetail = '';
 
@@ -125,5 +99,14 @@ class CustomerController extends Controller
 
         return redirect()->route($this->routePrefix . 'index')
                 ->with('success', 'Barcode updated successfully');
+    }
+
+    public function show(customer $customer)
+    {
+        $branches = Branch::where([
+                                ['owners_id', '=', $customer->id],
+                                ['owners_type', '=', 'Customer'],
+                            ])->orderBy('created_at', 'desc')->get();
+        return view($this->viewPrefix . 'branch.index', compact('branches'));
     }
 }

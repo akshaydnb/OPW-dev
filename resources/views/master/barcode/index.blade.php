@@ -35,7 +35,7 @@
                                 <td>{{ $barcode->product->title }}</td>
                                 <td>
                                     <a href="{{ route('barcode.edit', $barcode->id) }}" data-toggle="tooltip" data-original-title="Edit" data-placement="bottom"><i class="fa fa-pencil fa-lg fa-fw text-primary"></i></a>
-                                    &nbsp;<a href="#" data-toggle="tooltip" data-original-title="View Details" data-placement="bottom"><i class="fa fa-eye fa-lg"></i></a>
+                                    <!-- &nbsp;<a href="#" data-toggle="tooltip" data-original-title="View Details" data-placement="bottom"><i class="fa fa-eye fa-lg"></i></a> -->
                                 </td>
                             </tr>
                             @endforeach

@@ -11,7 +11,7 @@
                 <h4>Add New Customer</h4>
             </div>
             <div class="panel-body">
-                {!! Form::open(['method' => 'POST', 'data-toggle' => 'validator']) !!}
+                {!! Form::open(['method' => 'POST', 'data-toggle' => 'validator', 'id' => 'customer-create']) !!}
                     @include('master.customer.form')
                     <div id="div-CP">
                         <div class="div-CP-list">
@@ -19,35 +19,43 @@
                                 <h3>Contact Person</h3>
                                 <hr>
                             </div>
-                            <div class="form-group">
-                                <div class="row gutter">
-                                    <div class="col-md-4">
+                            <div class="row gutter">
+                                <div class="col-md-4">
+                                    <div class="form-group">
                                         <label class="control-label">Full Name</label>
-                                        <input type="text" class="form-control" name="fullName[]" />
+                                        <input type="text" class="form-control" name="fullName[]" data-error="Please Enter Full Name" required/>
                                     </div>
-                                    <div class="col-md-4">
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
                                         <label class="control-label">Mobile Number</label>
-                                        <input type="number" class="form-control" name="mobileNumber[]" />
+                                        <input type="number" class="form-control" name="mobileNumber[]" data-error="Please Enter Mobile Number" required />
                                     </div>
-                                    <div class="col-md-4">
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
                                         <label class="control-label">WhatsApp Number</label>
-                                        <input type="number" class="form-control" name="whatsAppNumber[]" />
+                                        <input type="number" class="form-control" name="whatsAppNumber[]" data-error="Please Enter WhatsApp Number" required />
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="row gutter">
-                                    <div class="col-md-4">
+                            <div class="row gutter">
+                                <div class="col-md-4">
+                                    <div class="form-group">
                                         <label class="control-label">Official Email ID</label>
-                                        <input type="email" class="form-control" name="officialEmailID[]" />
+                                        <input type="email" class="form-control" name="officialEmailID[]" data-error="Please Enter Official Email ID" required />
                                     </div>
-                                    <div class="col-md-4">
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
                                         <label class="control-label">Personal Email ID</label>
-                                        <input type="email" class="form-control" name="personalEmailID[]" />
+                                        <input type="email" class="form-control" name="personalEmailID[]"  />
                                     </div>
-                                    <div class="col-md-4">
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
                                         <label class="control-label">Designation</label>
-                                        <input type="text" class="form-control" name="designation[]" />
+                                        <input type="text" class="form-control" name="designation[]" data-error="Please Enter Designation" required />
                                     </div>
                                 </div>
                             </div>
@@ -60,38 +68,46 @@
                 {!! Form::close() !!}
                 <div class="copy-CP hidden">
                     <div class="form-group">
-                        <h3>Contact Person <i class="fa fa-times text-danger remove" style="cursor: pointer" data-toggle="tooltip" data-original-title="Delete" data-placement="bottom"></i></h3>
+                        <h3>Contact Person <i class="fa fa-times text-danger button-remove-CP" style="cursor: pointer" data-toggle="tooltip" data-original-title="Delete" data-placement="bottom"></i></h3>
                         <hr>
                     </div>
-                    <div class="form-group">
-                        <div class="row gutter">
-                            <div class="col-md-4">
+                    <div class="row gutter">
+                        <div class="col-md-4">
+                            <div class="form-group">
                                 <label class="control-label">Full Name</label>
-                                <input type="text" class="form-control" name="fullName[]" />
+                                <input type="text" class="form-control" name="fullName[]" data-error="Please Enter Full Name" required/>
                             </div>
-                            <div class="col-md-4">
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
                                 <label class="control-label">Mobile Number</label>
-                                <input type="number" class="form-control" name="mobileNumber[]" />
+                                <input type="number" class="form-control" name="mobileNumber[]" data-error="Please Enter Mobile Number" required />
                             </div>
-                            <div class="col-md-4">
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
                                 <label class="control-label">WhatsApp Number</label>
-                                <input type="number" class="form-control" name="whatsAppNumber[]" />
+                                <input type="number" class="form-control" name="whatsAppNumber[]" data-error="Please Enter WhatsApp Number" required />
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="row gutter">
-                            <div class="col-md-4">
+                    <div class="row gutter">
+                        <div class="col-md-4">
+                            <div class="form-group">
                                 <label class="control-label">Official Email ID</label>
-                                <input type="email" class="form-control" name="officialEmailID[]" />
+                                <input type="email" class="form-control" name="officialEmailID[]" data-error="Please Enter Official Email ID" required />
                             </div>
-                            <div class="col-md-4">
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
                                 <label class="control-label">Personal Email ID</label>
-                                <input type="email" class="form-control" name="personalEmailID[]" />
+                                <input type="email" class="form-control" name="personalEmailID[]"  />
                             </div>
-                            <div class="col-md-4">
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
                                 <label class="control-label">Designation</label>
-                                <input type="text" class="form-control" name="designation[]" />
+                                <input type="text" class="form-control" name="designation[]" data-error="Please Enter Designation" required />
                             </div>
                         </div>
                     </div>
@@ -113,8 +129,10 @@
                 $("#button-add-CP").addClass("hidden");
             }
             $('[data-toggle="tooltip"]').tooltip();
+            var formid = $('form').attr('id');
+            $("#"+formid).validator('update');
         });
-        $("body").on("click",".remove",function(){ 
+        $("body").on("click",".button-remove-CP",function(){ 
             currentCP--;
             if(currentCP < 5){
                 $("#button-add-CP").removeClass("hidden");

@@ -16,20 +16,24 @@
                     <table id="responsiveTable" class="table table-striped table-bordered no-margin">
                         <thead>
                             <tr>
+                                <th>#</th>
                                 <th>Customer Name</th>
                                 <th>Number of Branch</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($customers as $customer)
                             <tr>
-                                <td>DNB Opticals</td>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $customer->name }}</td>
                                 <td>3</td>
                                 <td>
-                                    <a href="{{ url('/master/customer/edit') }}" data-toggle="tooltip" data-original-title="Edit" data-placement="bottom"><i class="fa fa-pencil fa-lg text-primary"></i></a>
-                                    <a href="{{ url('/master/customer/branch') }}" data-toggle="tooltip" data-original-title="View Branches" data-placement="bottom"><i class="fa fa-eye fa-lg text-brown"></i></a>
+                                    <a href="{{ route('customer.edit', $customer->id) }}" data-toggle="tooltip" data-original-title="Edit" data-placement="bottom"><i class="fa fa-pencil fa-lg text-primary"></i></a>
+                                    <a href="{{ route('customer.branch', $customer->id) }}" data-toggle="tooltip" data-original-title="View Branches" data-placement="bottom"><i class="fa fa-eye fa-lg text-brown"></i></a>
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

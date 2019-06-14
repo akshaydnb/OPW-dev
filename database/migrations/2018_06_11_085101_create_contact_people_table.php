@@ -15,7 +15,7 @@ class CreateContactPeopleTable extends Migration
     {
         Schema::create('contact_people', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('branch_id', 11)->default(0);
+            $table->integer('branch_id')->default(0);
             $table->string('full_name', 255)->nullable();
             $table->string('mobile_number', 255)->nullable();
             $table->string('whatsapp_number', 255)->nullable();
