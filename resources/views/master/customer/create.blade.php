@@ -11,7 +11,7 @@
                 <h4>Add New Customer</h4>
             </div>
             <div class="panel-body">
-                {!! Form::open(['method' => 'POST', 'data-toggle' => 'validator', 'id' => 'customer-create']) !!}
+                {!! Form::open(['route' => 'customer.store', 'method' => 'POST', 'data-toggle' => 'validator', 'id' => 'customer-create']) !!}
                     @include('master.customer.form')
                     <div id="div-CP">
                         <div class="div-CP-list">
@@ -116,29 +116,4 @@
         </div>
     </div>
 </div>
-@endsection
-@section('script')
-    <script type="text/javascript">
-        var currentCP = 1;
-        $("#button-add-CP").on("click", function(){ 
-            currentCP++;
-            var copyHTML = $(".copy-CP").html();
-            $("#div-CP").append('<div class="div-CP-list">' + copyHTML + '</div>');
-            $(".div-CP-list:last input[type!=hidden]:first").focus();
-            if(currentCP == 5){
-                $("#button-add-CP").addClass("hidden");
-            }
-            $('[data-toggle="tooltip"]').tooltip();
-            var formid = $('form').attr('id');
-            $("#"+formid).validator('update');
-        });
-        $("body").on("click",".button-remove-CP",function(){ 
-            currentCP--;
-            if(currentCP < 5){
-                $("#button-add-CP").removeClass("hidden");
-            }
-            $(this).parents(".div-CP-list").remove();
-            $(".div-CP-list:last input[type!=hidden]:first").focus();
-        });
-    </script>
 @endsection

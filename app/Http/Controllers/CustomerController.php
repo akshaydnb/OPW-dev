@@ -25,7 +25,6 @@ class CustomerController extends Controller
 
     public function store(CustomerRequest $request)
     {
-        
         $customer = Customer::create([
             'name' => $request->name
         ]);
@@ -42,6 +41,17 @@ class CustomerController extends Controller
             'gst_number' => $request->gst_number,
             'gst_type' => $request->gst_type,
         ]);
+        for($i = 1; $i <= $request->shop_name; $i++){
+            contactPerson::create([
+                'branch_id' => $branch->id,
+                'full_name' => $request->fullName[$i],
+                'mobile_number' => $request->mobileNumber[$i],
+                'whatsapp_number' => $request->whatsAppNumber[$i],
+                'official_email' => $request->officialEmailID[$i],
+                'personal_email' => $request->personalEmailID[$i],
+                'designation' => $request->designation[$i],
+            ]);
+        }
 
         return redirect()->route($this->routePrefix . 'index')
                 ->with('success', 'Customer added successfully');

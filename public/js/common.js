@@ -158,3 +158,30 @@ $(function () {
 		$('#products').val(products);
 	});
 });
+
+$(function () {
+	var currentCP = 1;
+    $("#button-add-CP").on("click", function(){ 
+        currentCP++;
+        var copyHTML = $(".copy-CP").html();
+        $("#div-CP").append('<div class="div-CP-list">' + copyHTML + '</div>');
+        $(".div-CP-list:last input[type!=hidden]:first").focus();
+        if(currentCP == 5){
+            $("#button-add-CP").addClass("hidden");
+        }
+        $('[data-toggle="tooltip"]').tooltip();
+        var formid = $('form').attr('id');
+        $("#"+formid).validator('update');
+        $("#currentCP").val(currentCP);
+    });
+    $("body").on("click",".button-remove-CP",function(){ 
+        currentCP--;
+        if(currentCP < 5){
+            $("#button-add-CP").removeClass("hidden");
+        }
+        $(this).parents(".div-CP-list").remove();
+        $(".div-CP-list:last input[type!=hidden]:first").focus();
+        $("#currentCP").val(currentCP);
+        $("#"+formid).validator('update');
+    });
+});

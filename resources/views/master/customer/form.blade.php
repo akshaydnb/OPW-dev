@@ -43,3 +43,4 @@
     {!! Form::select('gst_type', [1 => 'CGST/SGST', 2 => 'IGST'], null, ['class' => 'form-control', 'placeholder' => 'Select GST Option', 'data-error' => 'Please Select GST Option', 'required' => true]) !!}
     <div class="help-block with-errors"></div>
 </div>
+{!! Form::hidden('currentCP', '', [ 'id' => 'currentCP']) !!}
