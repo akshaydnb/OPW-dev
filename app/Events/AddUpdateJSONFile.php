@@ -10,18 +10,19 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class AddUpdateProductParameter
+class AddUpdateJSONFile
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $type = '';
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($type)
     {
-        //
+        $this->type = $type;
     }
 
     /**

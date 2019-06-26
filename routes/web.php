@@ -38,9 +38,8 @@ Route::prefix('master')->group(function () {
 
     Route::resource('barcode', 'BarcodeController');
 
-    Route::view('/supplier', $prefix . 'supplier.index');
-    Route::view('/supplier/create', $prefix . 'supplier.create');
-    Route::view('/supplier/edit', $prefix . 'supplier.edit');
+    Route::resource('supplier', 'SupplierController');
+    
     Route::view('/supplier/branch', $prefix . 'supplier.branch.index');
     Route::view('/supplier/branch/create', $prefix . 'supplier.branch.create');
 

@@ -27,10 +27,10 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $customer->name }}</td>
-                                <td>3</td>
+                                <td>{{ $customer->branches->count() }}</td>
                                 <td>
                                     <a href="{{ route('customer.edit', $customer->id) }}" data-toggle="tooltip" data-original-title="Edit" data-placement="bottom"><i class="fa fa-pencil fa-lg text-primary"></i></a>
-                                    <a href="{{ route('customer.branch', $customer->id) }}" data-toggle="tooltip" data-original-title="View Branches" data-placement="bottom"><i class="fa fa-eye fa-lg text-brown"></i></a>
+                                    <a href="{{ route('customer.edit', $customer->id) }}" data-toggle="tooltip" data-original-title="View Branches" data-placement="bottom"><i class="fa fa-eye fa-lg text-brown"></i></a>
                                 </td>
                             </tr>
                             @endforeach

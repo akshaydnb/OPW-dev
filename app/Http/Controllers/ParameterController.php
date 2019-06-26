@@ -6,7 +6,7 @@ use App\Parameter;
 use App\Product;
 use App\ParameterBinding;
 use App\Http\Requests\ParameterRequest;
-use App\Events\AddUpdateProductParameter;
+use App\Events\AddUpdateJSONFile;
 
 class ParameterController extends Controller
 {
@@ -49,7 +49,7 @@ class ParameterController extends Controller
                 ]);
             }
         }
-        event(new AddUpdateProductParameter());
+        event(new AddUpdateJSONFile('productBinding'));
         return redirect()->route($this->routePrefix . 'index')
                 ->with('success', 'Parameter added successfully');
     }

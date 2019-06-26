@@ -11,29 +11,34 @@
                 <h4>Edit Customer</h4>
             </div>
             <div class="panel-body">
-                <form id="movieForm" method="post">
+                {!! Form::model($customer, ['route' => ['customer.update', $customer->id], 'method' => 'PATCH', 'data-toggle' => 'validator']) !!}
                     <div class="form-group">
                         <label class="control-label">Customer Name</label>
-                        <input type="text" class="form-control" name="customerName" value="DNB Opticals" autofocus/>
+                        {!! Form::text('name', null, ['class' => 'form-control', 'autofocus' => 'true', 'data-error' => 'Please Enter Customer Name', 'required' => true]) !!}
+                        <div class="help-block with-errors"></div>
                     </div>
                     <div class="form-group">
                         <label class="control-label">Default Billing Branch</label>
-                        <select name="defaultBillingBranch" class="form-control">
-                            <option value="">Select Default Billing Branch</option>
-                            <option value="DNB Optical">DNB Optical</option>
-                        </select>
+                        {!! Form::select('defaultBillingBranch', [], null, ['class' => 'form-control fillBranch', 'data-owner-type' => 'customer', 'data-owner-id' => $customer->id, 'id' => 'defaultBillingBranch', 'placeholder' => 'Select Default Billing Branch', 'data-error' => 'Please Select Default Billing Branch', 'required' => true]) !!}
                     </div>
                     <div class="form-group">
                         <label class="control-label">Default Shipping Branch</label>
-                        <select name="defaultShippingBranch" class="form-control">
-                            <option value="">Select Default Shipping Branch</option>
-                            <option value="DNB Optical">DNB Optical</option>
-                        </select>
+                        {!! Form::select('defaultShippingBranch', [], null, ['class' => 'form-control fillBranch', 'data-owner-type' => 'customer', 'data-owner-id' => $customer->id, 'id' => 'defaultShippingBranch', 'placeholder' => 'Select Default Billing Branch', 'data-error' => 'Please Select Default Billing Branch', 'required' => true]) !!}
                     </div>
-                    <button type="submit" class="btn btn-success">Submit</button>
+                    {!! Form::submit('Edit', ['class' => 'btn btn-success']) !!}                    
+                {!! Form::close() !!}
                 </form>
             </div>
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+<script>        
+    $( document ).ready(function() {
+        $("#defaultBillingBranch").val('{{ $customer->defaultBillingBranch }}');
+        $("#defaultShippingBranch").val('{{ $customer->defaultShippingBranch }}');
+    });
+</script>
 @endsection

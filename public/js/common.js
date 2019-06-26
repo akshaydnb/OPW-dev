@@ -185,3 +185,26 @@ $(function () {
         $("#"+formid).validator('update');
     });
 });
+
+$(function(){
+	$(".fillBranch").each(function() {
+		var owner_type = $(this).attr("data-owner-type");
+		var owner_id = $(this).attr("data-owner-id");
+		var urlBinding = '/storage/json/' + owner_type + 'Binding.json';
+
+		let dropdown = $(this);
+		dropdown.empty();
+		dropdown.append('<option selected="true" disabled>Select Branch</option>');
+		dropdown.prop('selectedIndex', 0);
+
+		$.getJSON(urlBinding, function (data) {
+			$.each(data, function (key, entry) {
+				if(key == owner_id){
+					$.each(entry, function (index, value) {
+						dropdown.append($('<option></option>').attr('value', value.id).text(value.shop_name));
+					});
+				}
+			});
+		});
+    });
+});

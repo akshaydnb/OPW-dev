@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CustomerRequest extends FormRequest
+class SupplierRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -49,8 +49,8 @@ class CustomerRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Customer Name should not be empty',
-            'name.max' => 'Customer Name should not have more then 255 characters',
+            'name.required' => 'Supplier Name should not be empty',
+            'name.max' => 'Supplier Name should not have more then 255 characters',
             // 'barcode.unique' => 'Barcode already available. Please enter unique HSN Code',
             'shop_name.required' => 'Shop Name should not be empty',
             'shop_name.max' => 'Shop Name should not have more then 255 characters',

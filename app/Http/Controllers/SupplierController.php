@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Customer;
+use App\Supplier;
 use App\Branch;
 use App\ContactPerson;
-use App\Http\Requests\CustomerRequest;
+use App\Http\Requests\SupplierRequest;
 use App\Events\AddUpdateJSONFile;
 
-class CustomerController extends Controller
+class SupplierController extends Controller
 {
-    private $viewPrefix = 'master.customer.';
-    private $routePrefix = 'customer.';
+    private $viewPrefix = 'master.supplier.';
+    private $routePrefix = 'supplier.';
 
     public function index()
     {
-        $customers = Customer::with('branches')->orderBy('created_at', 'desc')->get();
-        return view($this->viewPrefix . 'index', compact('customers'));
+        $suppliers = Supplier::with('branches')->orderBy('created_at', 'desc')->get();
+        return view($this->viewPrefix . 'index', compact('suppliers'));
     }
 
     public function create()
@@ -24,13 +24,13 @@ class CustomerController extends Controller
         return view($this->viewPrefix . 'create');
     }
 
-    public function store(CustomerRequest $request)
+    public function store(SupplierRequest $request)
     {
-        $customer = Customer::create([
+        $supplier = Supplier::create([
             'name' => $request->name
         ]);
 
-        $branch = $customer->branches()->create([
+        $branch = $supplier->branches()->create([
             'shop_name' => $request->shop_name,
             'branch_name' => $request->branch_name,
             'landline_number' => $request->landline_number,
@@ -53,37 +53,37 @@ class CustomerController extends Controller
             ]);
         }
 
-        $customer->update([
+        $supplier->update([
             'billing_branch_id' => $branch->id,
             'shipping_branch_id' => $branch->id,
         ]);
-        event(new AddUpdateJSONFile('customerBinding'));
+        event(new AddUpdateJSONFile('supplierBinding'));
         return redirect()->route($this->routePrefix . 'index')
-                ->with('success', 'Customer added successfully');
+                ->with('success', 'Supplier added successfully');
     }
 
-    public function edit(customer $customer)
+    public function edit(supplier $supplier)
     {
-        return view($this->viewPrefix . 'edit', compact('customer'));
+        return view($this->viewPrefix . 'edit', compact('supplier'));
     }
 
-    public function update(CustomerRequest $request, customer $customer)
+    public function update(SupplierRequest $request, supplier $supplier)
     {
-        $customer->update([
+        $supplier->update([
             'name' => $request->name,
             'defaultBillingBranch' => $request->defaultBillingBranch,
             'defaultShippingBranch' => $request->defaultShippingBranch,
         ]);
 
         return redirect()->route($this->routePrefix . 'index')
-                ->with('success', 'Customer updated successfully');
+                ->with('success', 'Supplier updated successfully');
     }
 
-    public function show(customer $customer)
+    public function show(supplier $supplier)
     {
         $branches = Branch::where([
-                                ['owners_id', '=', $customer->id],
-                                ['owners_type', '=', 'Customer'],
+                                ['owners_id', '=', $supplier->id],
+                                ['owners_type', '=', 'Supplier'],
                             ])->orderBy('created_at', 'desc')->get();
         return view($this->viewPrefix . 'branch.index', compact('branches'));
     }

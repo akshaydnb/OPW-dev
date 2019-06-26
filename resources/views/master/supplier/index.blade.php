@@ -16,20 +16,24 @@
                     <table id="responsiveTable" class="table table-striped table-bordered no-margin">
                         <thead>
                             <tr>
+                                <th>#</th>
                                 <th>Supplier Name</th>
                                 <th>Number of Branch</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($suppliers as $supplier)
                             <tr>
-                                <td>DNB Opticals</td>
-                                <td>5</td>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $supplier->name }}</td>
+                                <td>{{ $supplier->branches->count() }}</td>
                                 <td>
-                                    <a href="{{ url('/master/supplier/edit') }}" data-toggle="tooltip" data-original-title="Edit" data-placement="bottom"><i class="fa fa-pencil fa-lg text-primary"></i></a>
-                                    <a href="{{ url('/master/supplier/branch') }}" data-toggle="tooltip" data-original-title="View Branches" data-placement="bottom"><i class="fa fa-eye fa-lg text-brown"></i></a>
+                                    <a href="{{ route('supplier.edit', $supplier->id) }}" data-toggle="tooltip" data-original-title="Edit" data-placement="bottom"><i class="fa fa-pencil fa-lg text-primary"></i></a>
+                                    <a href="{{ route('supplier.edit', $supplier->id) }}" data-toggle="tooltip" data-original-title="View Branches" data-placement="bottom"><i class="fa fa-eye fa-lg text-brown"></i></a>
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

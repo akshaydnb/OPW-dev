@@ -13,7 +13,7 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\AddUpdateProductParameter' => [
+        'App\Events\AddUpdateJSONFile' => [
             'App\Listeners\MakeJsonFile',
         ],
     ];
