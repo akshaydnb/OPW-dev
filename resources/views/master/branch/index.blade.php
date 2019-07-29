@@ -45,7 +45,6 @@
                                     @else
                                         <a href="{{ url('/master/brnach/status/' . $branch->id) }}" data-toggle="tooltip" data-original-title="Active" data-placement="bottom"><i class="fa fa-times fa-lg fa-fw text-danger"></i></a>
                                     @endif
-                                    
                                 </td>
                             </tr>
                             @endforeach
