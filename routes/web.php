@@ -40,13 +40,15 @@ Route::prefix('master')->group(function () {
 
     Route::resource('supplier', 'SupplierController');
     
-    Route::view('/supplier/branch', $prefix . 'supplier.branch.index');
-    Route::view('/supplier/branch/create', $prefix . 'supplier.branch.create');
+    // Route::view('/supplier/branch', $prefix . 'supplier.branch.index');
+    // Route::view('/supplier/branch/create', $prefix . 'supplier.branch.create');
 
     Route::resource('customer', 'CustomerController');
 
-    Route::view('/customer/branch', $prefix . 'customer.branch.index');
-    Route::view('/customer/branch/create', $prefix . 'customer.branch.create');
+    // Route::view('/customer/branch', $prefix . 'customer.branch.index');
+    Route::get('/branch/{owners_type}/{owners_id}', 'BranchController@index');
+    Route::get('/branch/status/{id}', 'BranchController@changeStatus');
+    // Route::view('/customer/branch', $prefix . 'customer.branch.index');
 
 });
 

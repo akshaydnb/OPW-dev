@@ -2056,8 +2056,8 @@ ul.articles {
     -webkit-transform: scaleY(1); } }
 .loaded #loader {
   opacity: 0;
-  -webkit-transition: all 1s ease-out;
-  transition: all 1s ease-out; }
+  -webkit-transition: all 0.6s ease-out;
+  transition: all 0.6s ease-out; }
 
 .loaded #loading-wrapper {
   visibility: hidden;

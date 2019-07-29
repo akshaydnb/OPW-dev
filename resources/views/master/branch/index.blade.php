@@ -40,12 +40,12 @@
                                 <td>{{ $branch->state }}</td>
                                 <td>{{ $branch->gst_number }}</td>
                                 <td>
-                                    @if($HSNCode->status == 1)
+                                    @if($branch->status == 1)
                                         <a href="{{ url('/master/brnach/status/' . $branch->id) }}" data-toggle="tooltip" data-original-title="In-Active" data-placement="bottom"><i class="fa fa-check fa-lg fa-fw text-success"></i></a>
                                     @else
                                         <a href="{{ url('/master/brnach/status/' . $branch->id) }}" data-toggle="tooltip" data-original-title="Active" data-placement="bottom"><i class="fa fa-times fa-lg fa-fw text-danger"></i></a>
                                     @endif
-                                    <a href="{{ route('branch.edit', $branch->id) }}" data-toggle="tooltip" data-original-title="Edit" data-placement="bottom"><i class="fa fa-pencil fa-lg fa-fw text-primary"></i></a>
+                                    
                                 </td>
                             </tr>
                             @endforeach
