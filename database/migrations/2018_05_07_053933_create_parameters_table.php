@@ -16,8 +16,9 @@ class CreateParametersTable extends Migration
         Schema::create('parameters', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title', 255)->nullable();
-            $table->tinyInteger('for_type')->comment('Purchse And Sales [1], Only Sales [2]')->default(1);
+            $table->tinyInteger('for_type')->comment('Purchase And Sales [1], Only Sales [2], Only Purchase [3]')->default(1);
             $table->tinyInteger('status')->comment('Delete [-1], In-Active [0], Active [1]')->default(1);
+            $table->tinyInteger('is_date')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

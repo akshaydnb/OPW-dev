@@ -26,13 +26,13 @@
                             @foreach($products as $product)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $product->title }}</td>
-                                    <td>{{ $product->displayParameter }}</td>
+                                    <td>{{ $product['title'] }}</td>
+                                    <td>{{ $product['displayParameter'] }}</td>
                                     <td>
-                                        @if($product->status == 1)
-                                            <a href="{{ url('/master/product/status/' . $product->id) }}" data-toggle="tooltip" data-original-title="In-Active" data-placement="bottom"><i class="fa fa-check fa-lg text-success"></i></a>
+                                        @if($product['status'] == 1)
+                                            <a href="{{ url('/master/product/status/' . $product['id']) }}" data-toggle="tooltip" data-original-title="In-Active" data-placement="bottom"><i class="fa fa-check fa-lg text-success"></i></a>
                                         @else
-                                            <a href="{{ url('/master/product/status/' . $product->id) }}" data-toggle="tooltip" data-original-title="Active" data-placement="bottom"><i class="fa fa-times fa-lg text-danger"></i></a>
+                                            <a href="{{ url('/master/product/status/' . $product['id']) }}" data-toggle="tooltip" data-original-title="Active" data-placement="bottom"><i class="fa fa-times fa-lg text-danger"></i></a>
                                         @endif
                                     </td>
                                 </tr>

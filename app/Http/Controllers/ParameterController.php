@@ -21,7 +21,7 @@ class ParameterController extends Controller
             $products = '';
             if(count($tempProductIDs) > 0){
                 $products = Product::whereIn('id',$tempProductIDs)->orderBy('title');
-                $products =$products->pluck('title')->all();
+                $products = $products->pluck('title')->all();
                 $products = implode(', ',$products);
                 $parameter->displayProduct = $products;
             }
@@ -37,26 +37,23 @@ class ParameterController extends Controller
 
     public function store(ParameterRequest $request)
     {
+        $is_date = (isset($request->is_date)) ? 1 : 0;
         $parameter = Parameter::create([
             'title' => $request->title,
-            'for_type' => $request->for_type
+            'for_type' => $request->for_type,
+            'is_date' => $is_date
         ]);
-        if(isset($request->products) && count($request->products) > 0){
-            foreach ($request->products as $product) {
-                ParameterBinding::create([
-                    'product_id' => $product,
-                    'parameter_id' => $parameter->id
-                ]);
-            }
-        }
+
+        $parameter->addParameterBinding($request->products);
+        
         event(new AddUpdateJSONFile('productBinding'));
         return redirect()->route($this->routePrefix . 'index')
                 ->with('success', 'Parameter added successfully');
     }
 
-    public function changeStatus($id)
+    public function changeStatus(parameter $parameter)
     {
-        $parameter = Parameter::findOrFail($id);
+
         $parameter->status = $parameter->status == 1 ? 0 : 1;
         $parameter->save();
         return redirect()->route($this->routePrefix . 'index')

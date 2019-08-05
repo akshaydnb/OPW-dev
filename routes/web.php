@@ -23,10 +23,10 @@ Route::prefix('master')->group(function () {
     Route::view('/profile/create', $prefix . 'profile.create');
 
     Route::resource('product', 'ProductController');
-    Route::get('/product/status/{id}', 'ProductController@changeStatus');
+    Route::get('/product/status/{product}', 'ProductController@changeStatus');
 
     Route::resource('parameter', 'ParameterController');
-    Route::get('/parameter/status/{id}', 'ParameterController@changeStatus');
+    Route::get('/parameter/status/{parameter}', 'ParameterController@changeStatus');
 
     Route::resource('parameter-value', 'ParameterValueController');
     Route::get('/parameter-value/autosuggest/{id}/{search}', 'ParameterValueController@autosuggest');
@@ -39,16 +39,13 @@ Route::prefix('master')->group(function () {
     Route::resource('barcode', 'BarcodeController');
 
     Route::resource('supplier', 'SupplierController');
-    
-    // Route::view('/supplier/branch', $prefix . 'supplier.branch.index');
-    // Route::view('/supplier/branch/create', $prefix . 'supplier.branch.create');
 
     Route::resource('customer', 'CustomerController');
 
-    // Route::view('/customer/branch', $prefix . 'customer.branch.index');
-    Route::get('/branch/{owners_type}/{owners_id}', 'BranchController@index');
-    Route::get('/branch/status/{id}', 'BranchController@changeStatus');
-    // Route::view('/customer/branch', $prefix . 'customer.branch.index');
+    Route::get('branch/{owners_type}/{owners_id}', 'BranchController@index');
+    Route::get('branch/{owners_type}/{owners_id}/create', 'BranchController@create');
+    Route::post('branch/{owners_type}/{owners_id}/store', 'BranchController@store');
+    Route::get('branch/{owners_type}/{owners_id}/status/{id}', 'BranchController@changeStatus');
 
 });
 

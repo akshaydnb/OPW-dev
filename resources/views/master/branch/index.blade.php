@@ -41,9 +41,9 @@
                                 <td>{{ $branch->gst_number }}</td>
                                 <td>
                                     @if($branch->status == 1)
-                                        <a href="{{ url('/master/brnach/status/' . $branch->id) }}" data-toggle="tooltip" data-original-title="In-Active" data-placement="bottom"><i class="fa fa-check fa-lg fa-fw text-success"></i></a>
+                                        <a href="{{ url('/master/branch/'.$owners_type.'/'.$owners_id.'/status/' . $branch->id) }}" data-toggle="tooltip" data-original-title="In-Active" data-placement="bottom"><i class="fa fa-check fa-lg fa-fw text-success"></i></a>
                                     @else
-                                        <a href="{{ url('/master/brnach/status/' . $branch->id) }}" data-toggle="tooltip" data-original-title="Active" data-placement="bottom"><i class="fa fa-times fa-lg fa-fw text-danger"></i></a>
+                                        <a href="{{ url('/master/branch/'.$owners_type.'/'.$owners_id.'/status/' . $branch->id) }}" data-toggle="tooltip" data-original-title="Active" data-placement="bottom"><i class="fa fa-times fa-lg fa-fw text-danger"></i></a>
                                     @endif
                                 </td>
                             </tr>

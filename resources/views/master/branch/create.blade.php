@@ -11,11 +11,8 @@
                 <h4>Add New Branch</h4>
             </div>
             <div class="panel-body">
-                <form id="movieForm" method="post">
-                    <div class="form-group">
-                        <label class="control-label">Customer Name</label>
-                        <input type="text" class="form-control firstInput" name="customerName" autofocus/>
-                    </div>
+                {!! Form::open(['route' => 'branch.store', 'method' => 'POST', 'data-toggle' => 'validator']) !!}
+                    @include('master.branch.form')
                     <div class="form-group">
                         <label class="control-label">Shop Name</label>
                         <input type="text" class="form-control firstInput" name="shopName"/>
@@ -94,8 +91,8 @@
                         </div>
                     </div>
                     <button type="submit" class="btn btn-success">Submit</button>
-                    <button type="button" class="btn btn-info" id="button-add-CP" onclick="addCP();">Add Contact Person</button>
-                </form>
+                    <button type="button" class="btn btn-info" id="button-add-CP" onclick="addCP();">Add Contact Person</button>                
+                {!! Form::close() !!}
                 <div class="copy-CP hidden">
                     <div class="form-group">
                         <h3>Contact Person <i class="fa fa-times text-danger remove" style="cursor: pointer" data-toggle="tooltip" data-original-title="Delete" data-placement="bottom"></i></h3>

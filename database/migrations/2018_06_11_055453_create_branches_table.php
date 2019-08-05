@@ -25,6 +25,7 @@ class CreateBranchesTable extends Migration
             $table->string('state', 255)->nullable();
             $table->string('gst_number', 255)->nullable();
             $table->tinyInteger('gst_type')->comment('CGST/SGST [1], IGST [2]')->default(0);
+            $table->tinyInteger('status')->comment('Delete [-1], In-Active [0], Active [1]')->default(1);
             $table->timestamps();
         });
     }

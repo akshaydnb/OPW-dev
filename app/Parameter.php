@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Parameter extends Model
 {
     protected $fillable = [
-        'title', 'status', 'for_type'
+        'title', 'status', 'for_type', 'is_date'
     ];
 
     public function getForTypeAttribute($value)
@@ -23,6 +23,16 @@ class Parameter extends Model
     public function parameterBindings()
     {
         return $this->hasMany('App\ParameterBinding');
+    }
+
+    public function addParameterBinding($products){
+        if(isset($products) && count($products) > 0){
+            foreach ($products as $product) {
+                $this->parameterBindings()->create([
+                    'product_id' => $product
+                ]);
+            }
+        }
     }
 
 //    protected static function boot()

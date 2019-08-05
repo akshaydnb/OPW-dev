@@ -7,6 +7,8 @@ use App\Parameter;
 use App\ParameterBinding;
 use App\Http\Requests\ProductRequest;
 use App\Events\AddUpdateJSONFile;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -16,16 +18,11 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = Product::with('parameterBindings')->orderBy('created_at', 'desc')->get();
-        foreach ($products as $product) {
-            $tempParameterIds = $product->parameterBindings->pluck('parameter_id')->all();
-            $parameters = '';
-            if(count($tempParameterIds) > 0){
-                $parameters = Parameter::whereIn('id',$tempParameterIds)->orderBy('title');
-                $parameters =$parameters->pluck('title')->all();
-                $parameters = implode(', ',$parameters);
-            }
-            $product->displayParameter = $parameters;
+        $products = json_decode(Storage::get('public/json/products.json'), true);
+        $productBinding = json_decode(Storage::get('public/json/productBinding.json'), true);
+        foreach ($products as $key => $value) {
+            $products[$key]['id'] = $key;
+            $products[$key]['displayParameter'] = implode(',', array_pluck($productBinding[$key], 'title'));
         }
         return view($this->viewPrefix . 'index', compact('products'));
     }
@@ -41,42 +38,19 @@ class ProductController extends Controller
         $product = Product::create([
             'title' => $request->title
         ]);
-        if(isset($request->parameters) && count($request->parameters) > 0){
-            foreach ($request->parameters as $parameter) {
-                if($parameter == $request->grid_column || $parameter == $request->grid_row){
-                    continue;
-                }else{
-                     ParameterBinding::create([
-                        'product_id' => $product->id,
-                        'parameter_id' => $parameter
-                    ]);
-                }
-            }
-        }
-        if($request->grid_column > 0){
-            ParameterBinding::create([
-                'product_id' => $product->id,
-                'parameter_id' => $request->grid_column,
-                'type' => 1,
-            ]);
-        }
-        if($request->grid_row > 0){
-            ParameterBinding::create([
-                'product_id' => $product->id,
-                'parameter_id' => $request->grid_row,
-                'type' => 2,
-            ]);
-        }
+
+        $product->addParameterBinding($request->parameters, $request->grid_column, $request->grid_row);
+
         event(new AddUpdateJSONFile('productBinding'));
         return redirect()->route($this->routePrefix . 'index')
                 ->with('success', 'Product added successfully');
     }
 
-    public function changeStatus($id)
+    public function changeStatus(product $product)
     {
-        $product = Product::findOrFail($id);
         $product->status = $product->status == 1 ? 0 : 1;
         $product->save();
+        event(new AddUpdateJSONFile('productBinding'));
         return redirect()->route($this->routePrefix . 'index')
                 ->with('success', 'Product status changed successfully');
     }

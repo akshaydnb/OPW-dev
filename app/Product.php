@@ -20,6 +20,22 @@ class Product extends Model
     {
         return $this->hasMany('App\Barcode');
     }
+
+    public function addParameterBinding($parameters, $grid_column, $grid_row){
+        if(isset($parameters) && count($parameters) > 0){
+            foreach ($parameters as $parameter) {
+                $type = 0;
+                if($parameter == $grid_column)
+                    $type = 1;
+                else if($parameter == $grid_row)      
+                    $type = 2;          
+                $this->ParameterBinding()->create([
+                    'parameter_id' => $parameter,
+                    'type' => $type,
+                ]);
+            }
+        }
+    }
 //    protected static function boot()
 //    {
 //        parent::boot();
