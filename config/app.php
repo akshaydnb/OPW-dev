@@ -51,7 +51,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://php72dnb.local'),
+    'url' => env('APP_URL', 'https://opticalerp.com'),
 
     /*
     |--------------------------------------------------------------------------
